@@ -27,6 +27,40 @@ License: GLPv3
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-if ( ! defined('ABSPATH') ){
-    die;
+defined('ABSPATH') or die('No access for u'); //als deze file gerunt word door iets anders dan wordpress: stop
+
+class Tribe_A_Plugin_Main
+{
+    function __construct() //runt zodra de class aangeroepen is. accepteerd arguments vanuit class call.
+    {
+    }
+
+    function activation()
+    {
+        // do something on activation
+    }
+
+    function deactivation()
+    {
+        // do something on deactivation
+    }
+
+    function uninstall()
+    {
+        // werkt nog niet
+        // do something on uninstall
+    }
 }
+
+if(class_exists('Tribe_A_Plugin_Main')){
+    $Tribe_A_Plugin_Main = new Tribe_A_Plugin_Main();
+}
+
+//activation
+register_activation_hook(__file__ , array($Tribe_A_Plugin_Main, 'activation')); //on activation
+
+//deactivation
+register_deactivation_hook(__file__ , array($Tribe_A_Plugin_Main, 'deactivation')); //on deactivation
+
+//uninstall
+//register_uninstall_hook(__file__ , array($Tribe_A_Plugin_Main, 'uninstall')); //on uninstall
